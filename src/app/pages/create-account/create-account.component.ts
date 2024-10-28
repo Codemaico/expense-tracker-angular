@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-account',
@@ -14,8 +16,11 @@ export class CreateAccountComponent {
     name: new FormControl('', [Validators.required])
   });
 
-  createAccount(){
+  constructor(private userService: UserService, private router: Router){}
 
+  createAccount(){
+    this.userService.addUser(this.accountForm.value.name);
+    this.router.navigateByUrl('');
     
   }
 
